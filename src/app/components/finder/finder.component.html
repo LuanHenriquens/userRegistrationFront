@@ -1,0 +1,129 @@
+<div class="cotainer">
+
+  <div *ngIf="error" align="center">
+    <div style="width:475px;margin-top:10px" class="alert alert-error">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space: pre;"><b>{{message}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card box2">
+        <div class="card-header">Buscar</div>
+        <div class="card-body">
+          <form name="my-form" method="">
+            <div class="form-group row input-box">
+              <label for="full_name" class="col-md-4 col-form-label text-md-right">Nome completo</label>
+              <div class="col-md-6">
+                <input type="text" id="full_name" class="form-control" name="full-name" [(ngModel)]="name">
+              </div>
+            </div>
+
+            <div class="form-group row input-box">
+              <label for="person_type" class="col-md-4 col-form-label text-md-right">Ativo</label>
+              <div class="col-md-6">
+                <select name="person-type" class="form-control" [(ngModel)]="active">
+                  <option value=true>Ativo</option>
+                  <option value=false>Inativo</option>
+                  <option value>Todos</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group button">
+              <button type="submit" class="btn btn-primary" (click)="find()">
+                Buscar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row box2">
+        <table *ngIf="users.length > 0" class="table list-users table-striped" cellspacing="0"
+          id="ContentPlaceHolder1_grdBusca">
+          <tbody>
+            <tr style="color:#000;">
+              <th class="th-lg"><a style="color:#000;">Nome</a></th>
+              <th class="th-lg"><a style="color:#000;">Tipo da pessoa</a></th>
+              <th class="th-lg" mask="000.000.000-00"><a style="color:#000;">CPF</a></th>
+              <th class="th-lg"><a style="color:#000;">CNPJ</a></th>
+              <th class="th-lg"><a style="color:#000;">RG</a></th>
+              <th class="th-lg"><a style="color:#000;">IE</a></th>
+              <th class="th-lg"><a style="color:#000;">Data de registro</a></th>
+              <th class="th-lg"><a style="color:#000;">Ativo</a></th>
+              <th class="th-lg" scope="col" abbr="Editar" style="width:5px;"></th>
+              <th class="th-lg" scope="col" abbr="Excluir" style="width:5px;"></th>
+            </tr>
+
+            <tr *ngFor="let item of users; let i = index">
+              <td>{{item.name}}</td>
+              <td>{{item.personType == 'f' ? 'Física' : 'Jurídica'}}</td>
+              <td>{{item.cpf}}</td>
+              <td>{{item.cnpj}}</td>
+              <td>{{item.rg}}</td>
+              <td>{{item.ie}}</td>
+              <td>{{item.registrationDate | date: 'dd/MM/yyyy'}}</td>
+              <td>
+                <input type="checkbox" name="ativo" disabled [(ngModel)]="item.active">
+              </td>
+
+              <td>
+                <a [routerLink]="['../register',item.id]" class="glyphicon glyphicon-pencil" style="cursor: pointer">
+                </a>
+              </td>
+              <td>
+                <a class="glyphicon glyphicon-remove" style="cursor: pointer; color: rgb(192, 0, 0)" (click)="openModal(modalExcluir)">
+                </a>
+              </td>
+
+              <ng-template #modalExcluir>
+
+                <div class="modal-header text-center" style="background-color: #f2f2f2; max-height: 80px !important;">
+                  <div class="col-md-12">
+                    <a href="javascript:void(0)" style="color: black;">
+                      <i class="fa fa-times float-right" aria-hidden="true" (click)="objModal.hide()"></i>
+                    </a>
+                    <b>Atenção!</b>
+
+                  </div>
+                </div>
+
+                <div class="modal-body center-content">
+                  <div class="container" style="padding-bottom:  15px !important;">
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="font-size: 14px; text-align: left;">
+                      Deseja realmente remover o usuario {{item.name}}?
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer d-flex flex-column align-items-center">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="font-size: 14px;">
+                      <button (click)="remove(item.id)" class="btn btn-primary float-left" style="width: 9em;">
+                        Sim
+                    </button>
+                      <button (click)="objModal.hide()" class="btn btn-primary float-right" style="width: 9em;">
+                        Não
+                    </button>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

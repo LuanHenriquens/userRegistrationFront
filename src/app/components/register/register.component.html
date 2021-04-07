@@ -1,0 +1,115 @@
+<div class="cotainer">
+
+  <div *ngIf="error" align="center">
+    <div style="width:475px;margin-top:10px" class="alert alert-error">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space: pre;"><b>{{message}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="success" align="center">
+    <div style="width:475px;margin-top:10px" class="alert alert-success">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/success.png" /></td>
+          <td>
+            <h6 style="white-space: pre;"><b>{{message}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card box1">
+        <div class="card-header">{{user.id > 0 ? 'Edição' : 'Cadastro'}}</div>
+        <div class="card-body">
+          <form name="my-form" method="">
+            <div class="form-group row input-box">
+              <label for="full_name" class="col-md-4 col-form-label text-md-right">Nome completo</label>
+              <div class="col-md-6">
+                <input type="text" id="full_name" class="form-control" name="full-name" [(ngModel)]="user.name">
+              </div>
+            </div>
+
+            <div class="form-group row input-box">
+              <label for="person_type" class="col-md-4 col-form-label text-md-right">Tipo de pessoa</label>
+              <div class="col-md-6">
+                <select name="person-type" class="form-control" [(ngModel)]="user.personType">
+                  <option value="f">Física</option>
+                  <option value="j">Jurídica</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row input-box" *ngIf="user.personType === 'f'">
+              <label for="cpf" class="col-md-4 col-form-label text-md-right">CPF</label>
+              <div class="col-md-6">
+                <input type="text" id="cpf" class="form-control" name="cpf" mask="000.000.000-00" [(ngModel)]="user.cpf">
+              </div>
+            </div>
+
+            <div class="form-group row input-box" *ngIf="user.personType === 'j'">
+              <label for="cnpj" class="col-md-4 col-form-label text-md-right">CNPJ</label>
+              <div class="col-md-6">
+                <input type="text" id="cnpj" class="form-control" name="cnpj" mask="00.000.000/0000-00" [(ngModel)]="user.cnpj">
+              </div>
+            </div>
+
+            <div class="form-group row input-box" *ngIf="user.personType === 'f'">
+              <label for="rg" class="col-md-4 col-form-label text-md-right">RG</label>
+              <div class="col-md-6">
+                <input type="text" id="rg" class="form-control" name="rg" mask="00.000.000-0" [(ngModel)]="user.rg">
+              </div>
+            </div>
+
+            <div class="form-group row input-box" *ngIf="user.personType === 'j'">
+              <label for="ie" class="col-md-4 col-form-label text-md-right">Inscrição Estadual (IE)</label>
+              <div class="col-md-6">
+                <input type="text" id="ie" class="form-control" name="ie" [(ngModel)]="user.ie">
+              </div>
+            </div>
+
+            <div class="form-group row input-box">
+              <label for="active" class="col-md-4 col-form-label text-md-right">Ativo</label>
+              <div class="col-md-6">
+                <select name="active" class="form-control" [(ngModel)]="user.active">
+                  <option value=true>Ativo</option>
+                  <option value=false>Inativo</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row input-box">
+              <label for="phone" class="col-md-4 col-form-label text-md-right">Telefone</label>
+              <div class="col-md-6 phone">
+                <input type="text" id="phone" class="form-control" name="phone" mask="(00) 00000-0000" [(ngModel)]="phone">
+                <button type="button" class="btn btn-outline-info glyphicon glyphicon-plus" (click)="addPhone()"></button>
+              </div>
+            </div>
+
+            <div *ngFor="let item of userPhoneMask; let i = index" class="form-group row input-box">
+              <label class="col-md-4 col-form-label text-md-right">Telefone {{i + 1}}</label>
+              <div class="col-md-6">
+                <label for="phone" class="col-md-11" mask="(00) 00000-0000">{{item}}</label>
+                <button type="button" class="col-md-1 btn btnRemovePhone glyphicon glyphicon-trash" (click)="removePhone(i)"></button>
+              </div>
+            </div>
+
+            <div class="form-group button">
+              <button type="submit" class="btn btn-primary" (click)="save()">
+                {{user.id > 0 ? 'Editar' : 'Cadastrar'}}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

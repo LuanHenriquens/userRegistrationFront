@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+.input-box {
+  margin-bottom: 10px;
+}
+
+.button {
+  margin-top: 50px;
+}
+.box1 {
+  margin: 5px;
+  border: 1px solid #b7b7b7;
+  border-radius: 5px;
+  box-shadow: 0px 2px 10px -1px black;
+}
+
+.box2 {
+  margin: 5px;
+  border: 1px solid #b7b7b7;
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px -1px black;
+}
+
+.table-striped > tbody > tr:nth-child(2n + 1) > td,
+.table-striped > tbody > tr:nth-child(2n + 1) > th {
+  background-color: rgba(181, 217, 255, 0.268) !important;
+}
+
+.modal-backdrop.fade {
+  opacity: 0.5;
+}
+.modal-open .modal {
+  opacity: 1;
+}
