@@ -13,4 +13,4 @@ app.get('/*', function (req, res) {
 });
 
 // Inicia a aplicação pela porta configurada
-app.listen(process.env.PORT || 5000);
+app.listen(process.env.PORT, '0.0.0.0');
