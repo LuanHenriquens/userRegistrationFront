@@ -13,10 +13,10 @@ export class FinderService {
   ) { }
 
   getUser(name?: string, active?: boolean) {
-    return this.http.get<User[]>(`/api/user?name=${name}&active=${active == null ? '' : active}`).toPromise();
+    return this.http.get<User[]>(`${environment.api_url}/api/user?name=${name}&active=${active == null ? '' : active}`).toPromise();
   }
 
   deleteUser(userId: number) {
-    return this.http.delete<void>(`/api/user/${userId}`).toPromise();
+    return this.http.delete<void>(`${environment.api_url}/api/user/${userId}`).toPromise();
   }
 }

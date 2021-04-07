@@ -16,22 +16,22 @@ export class RegisterService {
   ) { }
 
   getById(userId: number) {
-    return this.http.get<UserDto>(`/api/user/${userId}`).toPromise();
+    return this.http.get<UserDto>(`${environment.api_url}/api/user/${userId}`).toPromise();
   }
 
   postUser(userInsertDto: UserInsertDto) {
-    return this.http.post<User>(`/api/user`, userInsertDto).toPromise();
+    return this.http.post<User>(`${environment.api_url}/api/user`, userInsertDto).toPromise();
   }
 
   putUser(userDto: UserDto) {
-    return this.http.put<UserDto>(`/api/user`, userDto).toPromise();
+    return this.http.put<UserDto>(`${environment.api_url}/api/user`, userDto).toPromise();
   }
 
   getPhone(userId: number) {
-    return this.http.get<UserPhone[]>(`/api/user/phone?userId=${userId}`).toPromise();
+    return this.http.get<UserPhone[]>(`${environment.api_url}/api/user/phone?userId=${userId}`).toPromise();
   }
 
   deletePhone(phone: string,userId: number) {
-    return this.http.delete<void>(`/api/user/phone?phone=${phone}&userId=${userId}`).toPromise();
+    return this.http.delete<void>(`${environment.api_url}/api/user/phone?phone=${phone}&userId=${userId}`).toPromise();
   }
 }
