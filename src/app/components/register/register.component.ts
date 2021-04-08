@@ -140,7 +140,7 @@ export class RegisterComponent implements OnInit {
       this.userPhoneMask.splice(index, 1);
     } else {
       if(this.userPhone[index].id > 0)
-        this.service.deletePhone(this.userPhone[index].phone,this.user.id);
+        this.service.deletePhone(this.userPhone[index]);
       this.userPhoneMask.splice(index, 1);
       this.userPhone.splice(index, 1);
     }

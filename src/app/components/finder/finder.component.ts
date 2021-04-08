@@ -38,8 +38,8 @@ export class FinderComponent implements OnInit {
     });
   }
 
-  remove(userId: number) {
-    this.service.deleteUser(userId).then(() => {
+  remove(user: User) {
+    this.service.deleteUser(user).subscribe(() => {
       this.objModal.hide();
       this.find();
     });

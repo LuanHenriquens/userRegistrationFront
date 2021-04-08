@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/User';
 import { environment } from 'src/environments/environment';
 
@@ -16,7 +16,7 @@ export class FinderService {
     return this.http.get<User[]>(`${environment.api_url}/api/user?name=${name}&active=${active == null ? '' : active}`).toPromise();
   }
 
-  deleteUser(userId: number) {
-    return this.http.delete<void>(`${environment.api_url}/api/user/${userId}`).toPromise();
+  deleteUser(user: User) {
+    return this.http.post(`${environment.api_url}/api/user/delete/user`,user);
   }
 }

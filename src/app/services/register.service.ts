@@ -31,7 +31,7 @@ export class RegisterService {
     return this.http.get<UserPhone[]>(`${environment.api_url}/api/user/phone?userId=${userId}`).toPromise();
   }
 
-  deletePhone(phone: string,userId: number) {
-    return this.http.delete<void>(`${environment.api_url}/api/user/phone?phone=${phone}&userId=${userId}`).toPromise();
+  deletePhone(phone: UserPhone) {
+    return this.http.post(`${environment.api_url}/api/user/delete/user`,phone);
   }
 }
