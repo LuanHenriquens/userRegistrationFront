@@ -1,27 +1,23 @@
 # UserMkdata
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.7.
+Projeto gerado com Angular CLI version 11.2.8
 
-## Development server
+## Requisitos
+node, npm (desenvolvido na versão 14.16.1 do Node)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## SCRIPTS
+ng serve para iniciar a aplicação em http://localhost:4200/.
 
-## Code scaffolding
+ng build para criar build do projeto. Os artefatos de construção serão armazenados no diretório dist /. Use o sinalizador --prod para um build de produção.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Iniciar projeto local
 
-## Build
+git clone URL_REPOSITORIO_GIT
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+npm install
 
-## Running unit tests
+ng serve
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Site publicado no Heroku
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+https://user-luan-front.herokuapp.com/
