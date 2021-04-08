@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
   success: boolean = false;
   error: boolean = false;
   isNew: boolean = true;
+  loading: boolean = false;
 
   constructor(
     private service: RegisterService,
@@ -41,6 +42,7 @@ export class RegisterComponent implements OnInit {
 
     this.router.paramMap.subscribe(c => {
       if (c.get('id') != null) {
+        this.loading = true;
         this.userId = Number(c.get('id'));
 
         this.service.getById(this.userId).then(c => {
@@ -51,18 +53,21 @@ export class RegisterComponent implements OnInit {
           this.userPhone.forEach(u => {
             this.userPhoneMask.push(`(${u.phone.substr(0,2)}) ${u.phone.substr(2,5)}-${u.phone.substr(6,4)}`);
           });
+          this.loading = false;
         });
       }
     })
   }
 
   save() {
+    this.loading = true;
     if (this.user.personType == 'f' && this.validateCpf() == false)
     {
       this.error = true;
       this.message = 'Informe um CPF válido para continuar.';
       this.user.cpf = '';
       setTimeout(() => { this.message = ''; this.error = false; }, 4000);
+      this.loading = false;
       return;
     }
 
@@ -81,12 +86,13 @@ export class RegisterComponent implements OnInit {
         this.success = true;
           this.message = "Registro incluido com sucesso !";
           this.routerNavigate.navigate([`finder`]);
-
+          this.loading = false;
           setTimeout(() => { this.success = false; this.message = ''; }, 4000);
       })
       .catch(c => {
         this.error = true;
         this.message = c.error.mensagem;
+        this.loading = false;
         setTimeout(() => { this.message = ''; this.error = false; }, 4000);
       });
     } else {
@@ -98,12 +104,13 @@ export class RegisterComponent implements OnInit {
         this.success = true;
           this.message = "Registro atualizado com sucesso !";
           this.routerNavigate.navigate([`finder`]);
-
+          this.loading = false;
           setTimeout(() => { this.success = false; this.message = ''; }, 4000);
       })
       .catch(c => {
         this.error = true;
         this.message = c.error.mensagem;
+        this.loading = false;
         setTimeout(() => { this.message = ''; this.error = false; }, 4000);
       });
     }
@@ -136,14 +143,17 @@ export class RegisterComponent implements OnInit {
   }
 
   removePhone(index: number) {
+    this.loading = true;
     if (this.isNew) {
       this.userPhoneMask.splice(index, 1);
     } else {
+      console.log(this.userPhone[index].id > 0, this.userPhone[index].id)
       if(this.userPhone[index].id > 0)
-        this.service.deletePhone(this.userPhone[index]);
+        this.service.deletePhone(this.userPhone[index]).then(() => { });
       this.userPhoneMask.splice(index, 1);
       this.userPhone.splice(index, 1);
     }
+    this.loading = false;
   }
 
   validateCpf() {

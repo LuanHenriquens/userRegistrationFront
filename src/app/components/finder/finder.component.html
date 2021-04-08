@@ -1,5 +1,8 @@
 <div class="cotainer">
 
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true  }">
+  </ngx-loading>
+
   <div *ngIf="error" align="center">
     <div style="width:475px;margin-top:10px" class="alert alert-error">
       <table>

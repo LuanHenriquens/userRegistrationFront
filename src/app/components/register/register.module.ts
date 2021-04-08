@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { NgxMaskModule } from 'ngx-mask';
 import { RegisterRoutingModule } from './register-routing.module';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { RegisterRoutingModule } from './register-routing.module';
     RegisterRoutingModule,
     FormsModule,
     NgxMaskModule.forChild(),
+    NgxLoadingModule.forRoot({}),
   ]
 })
 @Injectable({ providedIn: 'root' })

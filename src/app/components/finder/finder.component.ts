@@ -15,6 +15,7 @@ export class FinderComponent implements OnInit {
   users: User[] = [];
   error: boolean = false;
   message: string = '';
+  loading: boolean = false;
   public objModal: BsModalRef;
 
   constructor(
@@ -27,18 +28,21 @@ export class FinderComponent implements OnInit {
   }
 
   find() {
+    this.loading = true;
     this.service.getUser(this.name,this.active).then(c => {
       this.users = c;
+      this.loading = false;
     })
     .catch(e => {
       this.error = true;
       this.message = e.error.mensagem;
-      console.log('erro',e)
+      this.loading = false;
       setTimeout(() => { this.message = ''; this.error = false; }, 4000);
     });
   }
 
   remove(user: User) {
+    this.loading = true;
     this.service.deleteUser(user).subscribe(() => {
       this.objModal.hide();
       this.find();
